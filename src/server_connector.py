@@ -30,7 +30,7 @@ def ssh_command(user, host, password, command):
     return child
 
 def disk_stat(server_ip):
-    child = ssh_command("root", server_ip, "tu597561694", "df -h")
+    child = ssh_command("root", server_ip, "", "df -h")
     child.expect(pexpect.EOF)
     disk = child.before
     disklist = str(disk, encoding='utf-8').strip().split('\n')
@@ -46,7 +46,10 @@ def disk_stat(server_ip):
         print("\t可用：", i[3], end = " ")
         print("\t已用%挂载点：", i[4])
 
+def time_task():
+    while True:
+        connect_server()
+        time.sleep(3600)
 
-connect_server()
 
 
